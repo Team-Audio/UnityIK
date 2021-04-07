@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802848, g: 0.22571506, b: 0.3069224, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -216,7 +216,7 @@ Camera:
   m_GameObject: {fileID: 733632822}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 2
+  m_ClearFlags: 1
   m_BackGroundColor: {r: 0.1981132, g: 0.1981132, b: 0.1981132, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
@@ -233,7 +233,7 @@ Camera:
   near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 0.2
   m_Depth: -1
   m_CullingMask:
@@ -257,13 +257,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733632822}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.026, y: 0.13, z: -0.159}
+  m_LocalRotation: {x: 0.34018517, y: -0.6054018, z: 0.31940967, w: 0.6447792}
+  m_LocalPosition: {x: -1.08, y: 1.37, z: 0.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 55.632, y: -86.392, z: 0}
 --- !u!114 &733632828
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,13 +307,13 @@ Light:
   m_GameObject: {fileID: 1379341141}
   m_Enabled: 1
   serializedVersion: 10
-  m_Type: 1
+  m_Type: 0
   m_Shape: 0
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1
-  m_Range: 10
-  m_SpotAngle: 30
-  m_InnerSpotAngle: 21.80208
+  m_Color: {r: 0.8599717, g: 0.042452812, b: 1, a: 1}
+  m_Intensity: 91.5
+  m_Range: 73.16
+  m_SpotAngle: 82.39489
+  m_InnerSpotAngle: 74.19697
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -322,7 +322,7 @@ Light:
     m_Strength: 1
     m_Bias: 0.05
     m_NormalBias: 0.4
-    m_NearPlane: 0.2
+    m_NearPlane: 0.1
     m_CullingMatrixOverride:
       e00: 1
       e01: 0
@@ -349,7 +349,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -367,13 +367,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1379341141}
-  m_LocalRotation: {x: -0.16169122, y: -0.83735275, z: 0.390464, w: -0.34674808}
-  m_LocalPosition: {x: 0, y: 3, z: 0}
+  m_LocalRotation: {x: -0.22715673, y: -0.74344414, z: 0.54855496, w: -0.3078605}
+  m_LocalPosition: {x: -3.7, y: 6.42, z: 3.98}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50.000004, y: -224.989, z: 0}
+  m_LocalEulerAnglesHint: {x: 72.844, y: -224.989, z: 0}
 --- !u!4 &1548305470 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1548305470, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
@@ -579,6 +579,30 @@ PrefabInstance:
     - target: {fileID: 1748366244, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_lowerBoundAngle1
+      value: 112
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_lowerBoundAngle2
+      value: 170.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_upperBoundAngle1
+      value: -164.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_upperBoundAngle2
+      value: -162.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_projectionNormal.y
+      value: 0.70710677
+      objectReference: {fileID: 0}
+    - target: {fileID: 1950204757, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
+      propertyPath: m_projectionNormal.z
+      value: -0.70710677
       objectReference: {fileID: 0}
     - target: {fileID: 224594101810563475, guid: d8140e119077e3b49b39ef58679c3746, type: 3}
       propertyPath: m_RootOrder
