@@ -9,11 +9,11 @@ I added the in the paper suggested hinge joint to simulate finger movement.
 
 ## TO DO:
 
--[x] Basic hand movement.
+- [x] Basic hand movement.
 
--[ ] Tweak parameters for more realistic hand movements.
+- [ ] Tweak parameters for more realistic hand movements.
 
--[ ] More sophisticated test environment / Piano playing test environment.
+- [ ] More sophisticated test environment / Piano playing test environment.
 
 
 
