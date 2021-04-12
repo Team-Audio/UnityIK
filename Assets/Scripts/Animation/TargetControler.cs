@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LeanTween;
+using System;
 public class TargetControler : MonoBehaviour
 {
     [SerializeField] private float m_fingerHeight = 1.0f;
@@ -19,10 +20,10 @@ public class TargetControler : MonoBehaviour
         descr.setEase(m_PlayCurve);
     }
 
-    public void PressKey(float force = 1.0f, float duration = 1.0f, float pressSpeed = 0.1f)
+    public void PressKey(Action callback, float force = 1.0f, float duration = 1.0f, float pressSpeed = 0.1f)
     {
         Debug.Log("pressing key!");
-        LeanTween.LeanTween.moveY(gameObject, m_Trans.position.y + m_fingerHeight, duration).setEase(m_PlayCurve);
+        LeanTween.LeanTween.moveY(gameObject, m_Trans.position.y + m_fingerHeight, duration).setEase(m_PlayCurve).setOnComplete(callback);
 
 
     }
