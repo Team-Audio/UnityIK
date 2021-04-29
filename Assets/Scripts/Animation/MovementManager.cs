@@ -3,97 +3,108 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using System;
+
+public struct PianoHistory
+{
+    public int keyIndex;
+    public int FingerIndex;
+    public bool lefthand;
+
+}
 public class MovementManager : MonoBehaviour
 {
-    public float TestDuration = 1.0f;
-    public int TestIndex = 1;
-    [SerializeField] private PianoKeyManager m_pianoManager;
+    public int BufferSize = 5;
+    public float m_speed = 1.0f;
+    [Header("----finger movement parameters----")]
 
+    [SerializeField] private float m_reachBackDuration = 0.075f;
+    [SerializeField] private float m_height = 0.015f;
+    [SerializeField] private List<AnimationCurve> m_FingerForceCurves = new List<AnimationCurve>(3);
+
+    [Header("----references----")]
+    [SerializeField] private PianoKeyManager m_pianoManager;
     [SerializeField] private List<Transform> m_leftHandTargets;
     [SerializeField] private List<Transform> m_rightHandTargets;
     [SerializeField] private Transform m_leftHand;
     [SerializeField] private Transform m_rightHand;
-    [SerializeField] private float m_height;
+    private float m_forceThreshold = 0.33f;
 
 
-    [SerializeField] private float m_speed = 1.0f;
-    [SerializeField] private float m_threshold = 1.0f;
-
-    private float startHeight = 0.0f;
+    private List<PianoHistory> m_history = new List<PianoHistory>();
 
     private void Start()
     {
         if (m_leftHandTargets.Count <= 0) return;
         Transform t = m_leftHandTargets[2];
-        startHeight = t.position.y;
-
+        m_forceThreshold = 1.0f / (float)m_FingerForceCurves.Count;
+        m_history = new List<PianoHistory>();
     }
-    private void Update()
+    public void UpdateHandPosition(List<NoteData> pianoKeys,float t)
     {
-        if (Input.GetKeyDown("x"))
+        //get size of list if it is smaller than bufferSize
+        int tempBufferSize = math.min(BufferSize, pianoKeys.Count);
+        if (tempBufferSize <= 0) return;
+        //get the average piano key of the next [buffersize] keys
+        int averageKey = 0;
+        for (int i = 0; i < tempBufferSize; i++)
         {
-            TargetControler c = m_leftHandTargets[0].GetComponent<TargetControler>();
-            //  c?.PressKey();
+            averageKey += pianoKeys[i].KeyIndex;
         }
-        if (Input.GetKeyDown("c"))
-        {
-            TargetControler c = m_leftHandTargets[1].GetComponent<TargetControler>();
-            //   c?.PressKey();
-        }
-        if (Input.GetKeyDown("v"))
-        {
-            TargetControler c = m_leftHandTargets[2].GetComponent<TargetControler>();
-            //  c?.PressKey();
-        }
-        if (Input.GetKeyDown("b"))
-        {
-            TargetControler c = m_leftHandTargets[3].GetComponent<TargetControler>();
-            //c?.PressKey();
-        }
-        if (Input.GetKeyDown("n"))
-        {
-            TargetControler c = m_leftHandTargets[4].GetComponent<TargetControler>();
-            //  c?.PressKey();
-        }
-
-        if (Input.GetKeyDown("space"))
-        {
-
-            if (m_pianoManager == null) return;
-            PlayKey(TestIndex);
-        }
-
+        averageKey = averageKey / tempBufferSize;
+        Transform averageTrans = m_pianoManager.GetKey(averageKey);
+        float timeToNextNote = pianoKeys[0].TimeSinceStart - t;
+        LeanTween.LeanTween.moveZ(m_leftHand.gameObject, averageTrans.position.z, m_speed);
     }
-
-
     //handles all the key playing animation
     //should be called in an update loop that gets the key pressed data from the ML algorithm
-    public void PlayKey(int keyIndex, float duration = 1.0f, float force = 1.0f, int fingerIndex = -1)
+    public void PlayKey(int keyIndex, float duration = 1.0f, float velocity = 0.001f, int fingerIndex = -1)
     {
-        //get the key transform
+        Debug.Log(keyIndex);
+        //get the the transform of the piano key to animate
         Transform KeyTransform = m_pianoManager.GetKey(keyIndex);
-        //get the target to move
+        if (KeyTransform == null)
+        {
+            Debug.LogError($"No Piano Key transform was found With index{keyIndex}");
+            return;
+        }
+
+        //get the finger to move, for now we just chose the closest finger 
         Transform targetTransform = closestTarget(KeyTransform);
         //move target to key
-        if (targetTransform == null) return;
+        if (targetTransform == null)
+        {
+            Debug.LogError("No Finger transform to animate was found");
+            return;
+        }
         TargetControler tC = targetTransform.GetComponent<TargetControler>();
+        if (tC == null)
+        {
+            Debug.LogError("'TargetControler' on finger to animate could not be found");
+            return;
+        }
 
-        Action rKAction = ReleaseKey;
-        tC.PressKey(rKAction);
-        //Call helper function to animate
-        //get call back when target was reached
-        //press key => move key and target
-        KeyAnimator.PressKey(KeyTransform, TestDuration);
+        //determine if the key is black or white
+        bool isBlack = KeyTransform.tag == "Black";
 
-        //get call back on key released
 
-        //release key
-        // KeyAnimator.ReleaseKey(KeyTransform, TestDuration);
+        //figure outr which animation curve to pick for pressing the key
+        AnimationCurve curve;
+        //pick animation curve based on the passed in force
+        Debug.Log($"Velocity = {velocity} , threshold = {m_forceThreshold}");
+        int force = Mathf.RoundToInt(velocity / m_forceThreshold);
+        Debug.Log($"force = {force}");
+        if (force > m_FingerForceCurves.Count || force < 0)
+        {
+            curve = m_FingerForceCurves[0];
+        }
+        else curve = m_FingerForceCurves[force];
+        //actually play the key
+        tC.PlayKey(KeyTransform, curve, duration, m_reachBackDuration, isBlack, m_height);
+        m_history.Add(new PianoHistory() { keyIndex = keyIndex, FingerIndex = tC.FingerIndex });
     }
-    private void ReleaseKey()
-    {
-        Debug.Log("Releasing key!");
-    }
+
+
+    //can be used to approximate the most likely finger to press the key based on the closest finger position to the key
     private Transform closestTarget(Transform key)
     {
         //Determine which hand is closest to the key
@@ -102,8 +113,15 @@ public class MovementManager : MonoBehaviour
         float distL = math.length(key.transform.position - m_leftHand.transform.position);
         //pick the targets based on the distance to the hand
         List<Transform> targetList;
-        if (distR > distL) targetList = m_leftHandTargets;
-        else targetList = m_rightHandTargets;
+        //chose left or right hand
+        if (distR > distL)
+        {
+            targetList = m_leftHandTargets;
+        }
+        else
+        {
+            targetList = m_rightHandTargets;
+        }
 
         //find the target closest to the key
         float dist = float.MaxValue;
@@ -111,7 +129,7 @@ public class MovementManager : MonoBehaviour
         for (int i = 0; i < targetList.Count; i++)
         {
             //get the distance and check if it is smaller than the so far smallest distance
-            float currentDist = math.length(key.transform.position - targetList[i].transform.position);
+            float currentDist = math.abs(key.transform.position.z - targetList[i].transform.position.z);
             if (currentDist < dist)
             {
                 //set index as the current index and store the new smallest distance
@@ -123,4 +141,5 @@ public class MovementManager : MonoBehaviour
         //return the closest transform found
         return targetList[currentIndex];
     }
+
 }

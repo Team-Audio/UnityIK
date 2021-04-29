@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Joint
+  - White
+  - Black
+  - Octave
   layers:
   - Default
   - TransparentFX
