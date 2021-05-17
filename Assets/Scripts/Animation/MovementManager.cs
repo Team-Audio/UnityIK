@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
 using System;
+using NoteSystem;
 
 public struct PianoHistory
 {
@@ -84,7 +85,7 @@ public class MovementManager : MonoBehaviour
         }
 
         //determine if the key is black or white
-        bool isBlack = KeyTransform.tag == "Black";
+        bool isBlack = KeyTransform.CompareTag("Black");
 
 
         //figure outr which animation curve to pick for pressing the key

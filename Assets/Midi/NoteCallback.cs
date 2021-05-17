@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.Layouts;
+using NoteSystem;
 
 // NoteCallback.cs - This script shows how to define a callback to get notified
 // on MIDI note-on/off events.
+
 
 public class NoteCallback : MonoBehaviour
 {
@@ -37,7 +38,7 @@ public class NoteCallback : MonoBehaviour
                     note.device.description.product
                 ));
                 //   mngr.PlayKey(note.noteNumber, 1.0f, 1.0f);
-                recorder.PlayKey(note.noteNumber - 21, velocity);
+                recorder.PressKey(note.noteNumber - 21, velocity);
                 if (visualizeKeyPressed)
                 {
                     Transform t = pianomngr.GetKey(note.noteNumber - 21);
