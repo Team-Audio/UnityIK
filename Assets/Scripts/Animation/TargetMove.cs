@@ -10,9 +10,7 @@ public class TargetMove : MonoBehaviour
     [SerializeField] private float m_speed = 1.0f;
 
     private Vector3 m_startPos;
-
-
-    // Start is called before the first frame update
+    
     void Start()
     {
         m_startPos = transform.position;

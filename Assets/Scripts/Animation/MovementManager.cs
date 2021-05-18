@@ -1,8 +1,7 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Unity.Mathematics;
-using System;
 using NoteSystem;
 
 public struct PianoHistory
@@ -10,7 +9,7 @@ public struct PianoHistory
     public int keyIndex;
     public int FingerIndex;
     public bool lefthand;
-
+    
 }
 public class MovementManager : MonoBehaviour
 {
@@ -62,35 +61,36 @@ public class MovementManager : MonoBehaviour
     {
         Debug.Log(keyIndex);
         //get the the transform of the piano key to animate
-        Transform KeyTransform = m_pianoManager.GetKey(keyIndex);
-        if (KeyTransform == null)
+        Transform keyTransform = m_pianoManager.GetKey(keyIndex);
+        
+        if (!keyTransform)
         {
             Debug.LogError($"No Piano Key transform was found With index{keyIndex}");
             return;
         }
-
         //get the finger to move, for now we just chose the closest finger 
-        Transform targetTransform = closestTarget(KeyTransform);
+        Transform targetTransform = closestTarget(keyTransform);
         //move target to key
-        if (targetTransform == null)
+        if (!targetTransform)
         {
             Debug.LogError("No Finger transform to animate was found");
             return;
         }
         TargetControler tC = targetTransform.GetComponent<TargetControler>();
-        if (tC == null)
+        if (!tC)
         {
-            Debug.LogError("'TargetControler' on finger to animate could not be found");
+            Debug.LogError("'TargetController' on finger to animate could not be found");
             return;
         }
-
+        
         //determine if the key is black or white
-        bool isBlack = KeyTransform.CompareTag("Black");
+        bool isBlack = keyTransform.CompareTag("Black");
 
 
         //figure outr which animation curve to pick for pressing the key
         AnimationCurve curve;
         //pick animation curve based on the passed in force
+        
         Debug.Log($"Velocity = {velocity} , threshold = {m_forceThreshold}");
         int force = Mathf.RoundToInt(velocity / m_forceThreshold);
         Debug.Log($"force = {force}");
@@ -100,7 +100,7 @@ public class MovementManager : MonoBehaviour
         }
         else curve = m_FingerForceCurves[force];
         //actually play the key
-        tC.PlayKey(KeyTransform, curve, duration, m_reachBackDuration, isBlack, m_height);
+        tC.PlayKey(keyTransform, curve, duration, m_reachBackDuration, isBlack, m_height);
         m_history.Add(new PianoHistory() { keyIndex = keyIndex, FingerIndex = tC.FingerIndex });
     }
 

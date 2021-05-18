@@ -10,15 +10,14 @@ public class TargetControler : MonoBehaviour
     private float m_startingHeight = 0;
     [SerializeField] private float m_fingerHeight = 1.0f;
     [SerializeField] private LeanTweenType tweenType;
-    private float m_duration = 0.1f;
     //[SerializeField] private AnimationCurve m_PlayCurve;
 
-    private Transform m_Trans;
+    private Transform m_trans;
 
     private void Start()
     {
         m_startingHeight = this.transform.position.y;
-        m_Trans = transform;
+        m_trans = transform;
     }
     //function handles playing of key, gets called by the finger movement manager
     public void PlayKey(Transform targetTransform, AnimationCurve curve, float duration = 1.0f, float reachBackDuration = 0.05f, bool blackKey = false, float height = 1.0f)
