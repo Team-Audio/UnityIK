@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Helper
 {
-    public static class TranformExtensions
+    public static class TransformExtensions
     {
         public static Transform FindNthParent(this Transform self,int N)
         {

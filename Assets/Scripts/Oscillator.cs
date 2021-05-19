@@ -1,6 +1,8 @@
+using System;
 using UnityEngine;
 using Unity.Mathematics;
 using System.Collections.Generic;
+using Helper;
 using Minis;
 [System.Serializable]
 public struct Envelope
@@ -28,39 +30,30 @@ public struct Envelope
         timeReleased = pReleased;
         IsOn = pOn;
     }
-    public Envelope(Envelope copyEnvelope)
-    {
-        Attack = copyEnvelope.Attack;
-        Decay = copyEnvelope.Decay;
-        StartAmp = copyEnvelope.StartAmp;
-        Amplitude = copyEnvelope.Amplitude;
-        Release = copyEnvelope.Release;
 
-        timePressed = copyEnvelope.timePressed;
-        timeReleased = copyEnvelope.timeReleased;
-        IsOn = copyEnvelope.IsOn;
+
+    public static Envelope MakeOn(Envelope copyEnvelope, double oT)
+    {
+        Envelope ret = copyEnvelope;
+        if (oT > 0)
+        {
+            ret.IsOn = true;
+            ret.timePressed = oT;
+        }
+
+        return ret;
     }
-    //note off constructor
-    public Envelope(Envelope copyEnvelope, double rT)
+    
+    public static Envelope MakeOff(Envelope copyEnvelope, double rT)
     {
-        Attack = copyEnvelope.Attack;
-        Decay = copyEnvelope.Decay;
-        StartAmp = copyEnvelope.StartAmp;
-        Amplitude = copyEnvelope.Amplitude;
-        Release = copyEnvelope.Release;
-
-        timePressed = copyEnvelope.timePressed;
+        Envelope ret = copyEnvelope;
         if (rT > 0)
         {
-            IsOn = false;
-            timeReleased = rT;
+            ret.IsOn = false;
+            ret.timeReleased = rT;
+        }
 
-        }
-        else
-        {
-            IsOn = copyEnvelope.IsOn;
-            timeReleased = copyEnvelope.timeReleased;
-        }
+        return ret;
     }
 
     public double GetAmplitude(double t)
@@ -103,20 +96,10 @@ public struct Envelope
         }
         return returnAmp;
     }
-    public void NoteOn(double t)
-    {
-        IsOn = true;
-        timePressed = t;
-    }
-    public Envelope NoteOff(double t)
-    {
-        Debug.Log("Off!");
-        return new Envelope(this, t);
-    }
 }
 
 
-public class Oscillator : MonoBehaviour
+public class Oscillator : ASynthesizer
 {
     [Range(0, 1)] public double noise_gain = 0.1f;
     public enum WaveType
@@ -133,7 +116,7 @@ public class Oscillator : MonoBehaviour
 
     [SerializeField] private WaveType m_waveType = WaveType.SINE;
     [SerializeField] private double m_frequency = 440.0;
-    [SerializeField] [Range(0, 0.3f)] float m_baseGain = 0.1f;
+    [SerializeField] [Range(0, 1.0f)] float m_baseGain = 0.1f;
     [SerializeField] float m_LFOAmplitude = 0.01f;
     [SerializeField] float m_LFOFrequ = 0.1f;
     private double m_gain = 0.0;
@@ -165,11 +148,11 @@ public class Oscillator : MonoBehaviour
         noiseRand = UnityEngine.Random.value;
         if (!playing) m_gain = 0;
     }
-    public void PlayNote(MidiNoteControl note)
+    public override void PlayNote(MidiNoteControl note)
     {
-        Envelope env = new Envelope(m_Envelope);
         Debug.Log(AudioSettings.dspTime);
-        env.NoteOn(AudioSettings.dspTime);
+        Envelope env = Envelope.MakeOn(m_Envelope,AudioSettings.dspTime);
+        
         //store new envelope for key if it already is stored, else store it 
         if (m_activeNotes.ContainsKey(note.noteNumber)) m_activeNotes[note.noteNumber] = env;
         else m_activeNotes.Add(note.noteNumber, env);
@@ -177,15 +160,9 @@ public class Oscillator : MonoBehaviour
         m_frequency = GetNoteFrequency(note.noteNumber);
         m_gain = m_baseGain;
     }
-    public void ReleaseNote(MidiNoteControl note)
+    public override void ReleaseNote(MidiNoteControl note)
     {
-        //Debug.Log(AudioSettings.dspTime);
         m_noteReleaseBuffer.Add(note.noteNumber, AudioSettings.dspTime);
-        //m_activeNotes[note.noteNumber].NoteOff(AudioSettings.dspTime);
-        //remove the note from the "active" notes
-        //   m_activeNotes.Remove(note.noteNumber);
-        //if this was the last note released we are not playing anymore
-        // if (m_activeNotes.Count <= 0) playing = false;
     }
     private double GetNoteFrequency(int index)
     {
@@ -203,7 +180,6 @@ public class Oscillator : MonoBehaviour
             case WaveType.SINE:
                 {
                     return math.sin(baseFreq);
-
                 }
             case WaveType.TRIANGLE:
                 {
@@ -222,11 +198,11 @@ public class Oscillator : MonoBehaviour
                 }
             case WaveType.NOISE_UNITY:
                 {
-                    return (2.0 * (double)m_Mrand.NextDouble() - 1.0) * noise_gain;
+                    return (2.0 * m_Mrand.NextDouble() - 1.0) * noise_gain;
                 }
             case WaveType.NOISE_SYSTEM:
                 {
-                    return (2.0 * (double)m_Srand.NextDouble() - 1.0) * noise_gain;
+                    return (2.0 * m_Srand.NextDouble() - 1.0) * noise_gain;
                 }
         }
         return 0;
@@ -238,26 +214,25 @@ public class Oscillator : MonoBehaviour
         //trigger all notes off that have been released
         foreach (var pair in m_noteReleaseBuffer)
         {
-            m_activeNotes[pair.Key] = m_activeNotes[pair.Key].NoteOff(pair.Value);
+            m_activeNotes[pair.Key] = Envelope.MakeOff(m_activeNotes[pair.Key], pair.Value);
         }
+        
         //clear buffer afterwards
         m_noteReleaseBuffer.Clear();
-        for (int i = 0; i < data.Length; i++) data[i] = 0;
-        foreach (int note in m_activeNotes.Keys)
+
+        foreach (var (noteID,noteData) in m_activeNotes)
         {
+           // if(!noteData.IsOn) continue;
+
             //    Debug.Log("playing sound ");
-            double frequency = GetNoteFrequency(note);
+            double frequency = GetNoteFrequency(noteID);
             increment = 1 / m_sampling_frequency;
             // m_phase = 0;
+
             for (int i = 0; i < data.Length; i++)
             {
                 m_phase += increment;
-                //double TimePhase = m_phase + m_Time;
-                //Debug.Log("TIME: " + m_Time.ToString());
-                //Debug.Log("Time Phase:" + TimePhase.ToString());
-                double amp = m_activeNotes[note].GetAmplitude(AudioSettings.dspTime);
-                // Debug.Log(amp);
-                //Debug.Log("Amplitude" + amp.ToString());
+                double amp = noteData.GetAmplitude(AudioSettings.dspTime);
                 data[i] += (float)(m_gain * amp * Osc(frequency, m_phase, m_waveType, m_LFOFrequ, m_LFOAmplitude));
                 if (m_phase > math.PI_DBL * 2) m_phase = 0;
             }

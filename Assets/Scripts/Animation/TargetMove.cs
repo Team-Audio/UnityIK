@@ -24,7 +24,7 @@ public class TargetMove : MonoBehaviour
         //invert direction if far enough away from the start position
         if (math.length(pos - m_startPos) >= m_range) m_speed *= -1;
         //add direction scaled by speed
-        pos += m_dir * m_speed * Time.deltaTime;
+        pos += m_dir * (m_speed * Time.deltaTime);
         //Set new pos
         transform.position = pos;
     }

@@ -76,7 +76,7 @@ public class MovementManager : MonoBehaviour
             Debug.LogError("No Finger transform to animate was found");
             return;
         }
-        TargetControler tC = targetTransform.GetComponent<TargetControler>();
+        TargetController tC = targetTransform.GetComponent<TargetController>();
         if (!tC)
         {
             Debug.LogError("'TargetController' on finger to animate could not be found");

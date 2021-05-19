@@ -8,7 +8,7 @@ using NoteSystem;
 
 public class NoteCallback : MonoBehaviour
 {
-    public Oscillator m_oscilator;
+    public ASynthesizer m_oscilator;
     public bool visualizeKeyPressed = true;
     public PianoKeyManager pianomngr;
     public MidiRecorder recorder;
