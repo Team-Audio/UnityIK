@@ -148,7 +148,7 @@ public class Oscillator : ASynthesizer
         noiseRand = UnityEngine.Random.value;
         if (!playing) m_gain = 0;
     }
-    public override void PlayNote(MidiNoteControl note)
+    public override void PlayNote(MidiNoteControl note, float velocity)
     {
         Debug.Log(AudioSettings.dspTime);
         Envelope env = Envelope.MakeOn(m_Envelope,AudioSettings.dspTime);

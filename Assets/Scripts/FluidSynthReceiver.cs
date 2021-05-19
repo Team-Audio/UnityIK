@@ -16,9 +16,9 @@ public class FluidSynthReceiver : ASynthesizer
         m_synth.ProgramSelect(0, id, 0, 0);
     }
     
-    public override void PlayNote(MidiNoteControl note)
+    public override void PlayNote(MidiNoteControl note, float velocity)
     {
-        m_synth.NoteOn(0, note.noteNumber, 80);
+        m_synth.NoteOn(0, note.noteNumber, (int)(velocity*127.0f));
     }
     public override void ReleaseNote(MidiNoteControl note)
     {

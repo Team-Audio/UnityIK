@@ -44,7 +44,7 @@ public class NoteCallback : MonoBehaviour
                     Transform t = pianomngr.GetKey(note.noteNumber - 21);
                     KeyAnimator.PressKey(t);
                 }
-                m_oscilator.PlayNote(note);
+                m_oscilator.PlayNote(note, velocity);
             };
 
             midiDevice.onWillNoteOff += (note) =>
