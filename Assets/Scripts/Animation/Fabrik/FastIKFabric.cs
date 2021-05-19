@@ -16,7 +16,8 @@ namespace DitzelGames.FastIK
         [SerializeField] private int m_chainLength = 3;
         [SerializeField] private Transform m_target;
 
-        [Header("Solver Parameters")] [SerializeField]
+        [Header("Solver Parameters")]
+        [SerializeField]
         private int m_iterations = 10;
 
         [SerializeField] private float m_threshold = 0.001f;
@@ -45,10 +46,11 @@ namespace DitzelGames.FastIK
         [SerializeField] private Vector3 m_rotationAxis;
 
 
-        [SerializeField] private List<float2> m_bounds = new List<float2>{
+        [SerializeField]
+        private List<float2> m_bounds = new List<float2>{
             new float2(-160,160),
             new float2(-160,160)
-            
+
         };
 
         [SerializeField] private float m_upperBoundAngle1 = 150.0f;
@@ -65,7 +67,9 @@ namespace DitzelGames.FastIK
         {
             //Normalize Projection Normal and rotation axis
             m_projectionNormal = m_projectionNormal.normalized;
-            m_rotationAxis = m_rotationAxis.normalized;
+            float3 temp = m_projectionNormal;
+            temp.z = -temp.z;
+            m_rotationAxis = temp;
 
             //Create array for bones
             m_bonesLength = new float[m_chainLength];
@@ -179,10 +183,18 @@ namespace DitzelGames.FastIK
         {
             //pre calculate the rotation axis and the world normal which are used in each iteration
             var directionToTarget = GetDirectionToTarget(targetPosition);
-            var rootRotation = m_rootTransform.rotation;
-
-            Vector3 planeNormal = math.normalize(math.cross(directionToTarget, rootRotation * m_projectionNormal));
-            Vector3 rotationAxis = rootRotation * m_rotationAxis;
+            directionToTarget.y = 0;
+            directionToTarget.Normalize();
+            Vector3 tempNoraml = GetPositionRootSpace(m_projectionNormal);
+            tempNoraml = m_rootTransform.rotation * m_projectionNormal ;
+            tempNoraml = m_projectionNormal;
+            Vector3 tempAxis = GetPositionRootSpace(m_rotationAxis);
+            tempAxis = m_rootTransform.rotation * m_rotationAxis;
+            tempAxis = m_rotationAxis;
+            Debug.Log(tempNoraml);
+            Debug.Log(tempAxis);
+            Vector3 planeNormal = math.normalize(math.cross(directionToTarget, tempNoraml));
+            Vector3 rotationAxis = planeNormal;
 
             //reset position
             for (int i = 0; i < m_data.End(); ++i)
@@ -211,7 +223,7 @@ namespace DitzelGames.FastIK
             for (int i = m_data.End(); i > 0; i--)
             {
                 var ikData = m_data[i];
-                
+
                 //check if current index is the end effector, end effectors position is set to the target position
                 if (i == m_data.End())
                 {
@@ -221,7 +233,7 @@ namespace DitzelGames.FastIK
                 else
                 {
                     var next = m_data[i + 1];
-                    
+
                     Vector3 dir;
                     //handle second and first index joints, which are hinge joints
                     if (i == 1 || i == 2)
@@ -270,8 +282,8 @@ namespace DitzelGames.FastIK
                     float angle = MathExtensions.singedAngleDeg(dir, dir2, math.normalize(planeNormal));
                     //check if direction needs to be calcualted from restricted angles
                     //otherwise use backwardsProjected for dir
-                    
-                    
+
+
                     //TODO(algorythmix) a better way of restricting the
                     //                  angles, would be this array,
                     //                  but this requires re-setting
@@ -286,7 +298,7 @@ namespace DitzelGames.FastIK
                         dir = RestrictRotation(angle, upper, lower, dir, rotationAxis);
                     }
                     */
-                    
+
                     if (i == 1)
                     {
                         dir = RestrictRotation(angle, m_upperBoundAngle1, m_lowerBoundAngle1, dir,
@@ -343,7 +355,13 @@ namespace DitzelGames.FastIK
             else
                 return Quaternion.Inverse(m_rootTransform.rotation) * (current.position - m_rootTransform.position);
         }
-
+        private Vector3 GetPositionRootSpace(Vector3 current)
+        {
+            if (m_rootTransform == null)
+                return current;
+            else
+                return Quaternion.Inverse(m_rootTransform.rotation) * (current - m_rootTransform.position);
+        }
         private void SetPositionRootSpace(Transform current, Vector3 position)
         {
             if (m_rootTransform == null)
@@ -380,7 +398,6 @@ namespace DitzelGames.FastIK
                 return math.normalize(newDir);
             }
             //rotate Counter Clockwise
-
             if (angle < lowerBound)
             {
                 float3 newDir =
