@@ -21,8 +21,8 @@ public class TargetController : MonoBehaviour
                         float reachBackDuration = 0.05f, bool blackKey = false, float height = 1.0f)
     {
         //get the target position
-        var transformPosition = transform.position;
-        
+        var transformPosition = transform.localPosition;
+
         var pos = new Vector3(
             transformPosition.x + (blackKey ? 0.01f : 0),
             transformPosition.y + height,
@@ -30,13 +30,13 @@ public class TargetController : MonoBehaviour
         );
         
         //separately animate on all axis
-        Tween.moveY(gameObject, pos.y, reachBackDuration)
+        Tween.moveLocalY(gameObject, pos.y, reachBackDuration)
              .setEase(curve);
         
-        Tween.moveZ(gameObject, pos.z, reachBackDuration)
+        Tween.moveLocalZ(gameObject, pos.z, reachBackDuration)
              .setEase(LeanTweenType.easeInExpo);
         
-        Tween.moveX(gameObject, pos.x, reachBackDuration)
+        Tween.moveLocalX(gameObject, pos.x, reachBackDuration)
              .setEase(LeanTweenType.easeInExpo)
              .setOnComplete(() => PressKey(duration - reachBackDuration, targetTransform, blackKey));
     }
@@ -46,7 +46,7 @@ public class TargetController : MonoBehaviour
         KeyAnimator.PressKey(key);
         float y = transform.position.y - m_fingerHeight;
         
-        Tween.moveY(gameObject, y, duration)
+        Tween.moveLocalY(gameObject, y, duration)
              .setEase(LeanTweenType.easeOutExpo)
              .setOnComplete(() => ReleaseKey(key, blackKey));
 
@@ -58,7 +58,7 @@ public class TargetController : MonoBehaviour
         
         float y = m_startingHeight + (blackKey ? m_blackKeyHeight : 0);
         
-        Tween.moveY(gameObject, y, 0.05f)
+        Tween.moveLocalY(gameObject, y, 0.05f)
              .setEase(LeanTweenType.easeInExpo);
     }
 }

@@ -9,7 +9,7 @@ public struct PianoHistory
     public int keyIndex;
     public int FingerIndex;
     public bool lefthand;
-    
+
 }
 public class MovementManager : MonoBehaviour
 {
@@ -39,7 +39,7 @@ public class MovementManager : MonoBehaviour
         m_forceThreshold = 1.0f / (float)m_FingerForceCurves.Count;
         m_history = new List<PianoHistory>();
     }
-    public void UpdateHandPosition(List<NoteData> pianoKeys,float t)
+    public void UpdateHandPosition(List<NoteData> pianoKeys, float t)
     {
         //get size of list if it is smaller than bufferSize
         int tempBufferSize = math.min(BufferSize, pianoKeys.Count);
@@ -62,7 +62,7 @@ public class MovementManager : MonoBehaviour
         Debug.Log(keyIndex);
         //get the the transform of the piano key to animate
         Transform keyTransform = m_pianoManager.GetKey(keyIndex);
-        
+
         if (!keyTransform)
         {
             Debug.LogError($"No Piano Key transform was found With index{keyIndex}");
@@ -82,7 +82,7 @@ public class MovementManager : MonoBehaviour
             Debug.LogError("'TargetController' on finger to animate could not be found");
             return;
         }
-        
+
         //determine if the key is black or white
         bool isBlack = keyTransform.CompareTag("Black");
 
@@ -90,10 +90,10 @@ public class MovementManager : MonoBehaviour
         //figure outr which animation curve to pick for pressing the key
         AnimationCurve curve;
         //pick animation curve based on the passed in force
-        
-        Debug.Log($"Velocity = {velocity} , threshold = {m_forceThreshold}");
+
+        // Debug.Log($"Velocity = {velocity} , threshold = {m_forceThreshold}");
         int force = Mathf.RoundToInt(velocity / m_forceThreshold);
-        Debug.Log($"force = {force}");
+        //   Debug.Log($"force = {force}");
         if (force > m_FingerForceCurves.Count || force < 0)
         {
             curve = m_FingerForceCurves[0];

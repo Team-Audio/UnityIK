@@ -6,28 +6,36 @@ public class FluidSynthReceiver : ASynthesizer
 {
     [SerializeField] private string m_soundfont = "C:\\soundfonts\\default.sf2";
     private FluidSynth m_synth;
-    [Range(0,10)]
+    [Range(0, 10)]
     [SerializeField] private float Amp = 2;
 
     private void Awake()
     {
         m_synth = new FluidSynth(25);
-        int id  = m_synth.SFLoad(m_soundfont);
+        int id = m_synth.SFLoad(m_soundfont);
         m_synth.ProgramSelect(0, id, 0, 0);
     }
-    
+    public void PlayNote(NoteSystem.NoteData data)
+    {
+        m_synth.NoteOn(0, data.KeyIndex+21, (int)(data.Velocity * 127.0f));
+    }
+    public void ReleaseNote(NoteSystem.NoteData data)
+    {
+        m_synth.NoteOff(0, data.KeyIndex+21);
+    }
+
     public override void PlayNote(MidiNoteControl note, float velocity)
     {
-        m_synth.NoteOn(0, note.noteNumber, (int)(velocity*127.0f));
+        m_synth.NoteOn(0, note.noteNumber, (int)(velocity * 127.0f));
     }
     public override void ReleaseNote(MidiNoteControl note)
     {
         m_synth.NoteOff(0, note.noteNumber);
     }
-    
+
     private void OnAudioFilterRead(float[] data, int channels)
     {
-        if(channels == 2)
+        if (channels == 2)
         {
             int sampleRate = data.Length / channels;
             var src = m_synth.GetSamplesInterleaved(sampleRate);
@@ -35,7 +43,7 @@ public class FluidSynthReceiver : ASynthesizer
             {
                 src[i] = src[i] * Amp;
             }
-            Buffer.BlockCopy(src,0,data,0,data.Length * sizeof(float));
+            Buffer.BlockCopy(src, 0, data, 0, data.Length * sizeof(float));
         }
         else if (channels == 1)
         {

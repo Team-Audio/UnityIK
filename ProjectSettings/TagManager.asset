@@ -8,6 +8,7 @@ TagManager:
   - White
   - Black
   - Octave
+  - Reactive
   layers:
   - Default
   - TransparentFX
