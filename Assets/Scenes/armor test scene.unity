@@ -599,7 +599,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8de6f2df68ebf74daf8eb3c32e2a2d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_oscilator: {fileID: 0}
+  m_oscilator: {fileID: 2130663024}
   visualizeKeyPressed: 1
   pianomngr: {fileID: 1800927973}
   recorder: {fileID: 1299520724}
@@ -4886,6 +4886,7 @@ GameObject:
   - component: {fileID: 2130663025}
   - component: {fileID: 2130663023}
   - component: {fileID: 2130663026}
+  - component: {fileID: 2130663024}
   m_Layer: 0
   m_Name: Basic synth
   m_TagString: Untagged
@@ -4989,6 +4990,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2130663024
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2130663022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c0d2957b714d70b017f33ac80a4d42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_soundfont: C:\Users\lukas\Desktop\fluid synth\Fazioli Grand Piano .SF2
+  Amp: 2
 --- !u!4 &2130663025
 Transform:
   m_ObjectHideFlags: 0

@@ -25,12 +25,11 @@ namespace NoteSystem
         private void Update()
         {
             if (!m_playing) return;
-            Debug.Log(m_songData.Count);
+            if (m_songData == null) return;
+            if (m_songData.Count == 0) return;
             m_Time += Time.deltaTime;
             for (int i = startingPosition; i < m_songData.Count; i++)
             {
-
-                Debug.Log(m_songData[i].TimeSinceStart);
                 if (m_songData[i].WasPlayed) continue;
 
                 if (m_songData[i].TimeSinceStart < m_Time)
@@ -65,7 +64,6 @@ namespace NoteSystem
         public void Stop()
         {
             m_playing = false;
-            Debug.Log("stoped Playing");
             //return if no song was initialized yet
             if (m_songData == null) return;
             for (int i = 0; i < m_songData.Count; i++)
@@ -78,7 +76,6 @@ namespace NoteSystem
 
         public void Play()
         {
-            Debug.Log("Started Playing");
             m_playing = true;
             m_songData = NoteDataStore.Data;
             m_Time = 0;

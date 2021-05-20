@@ -108,59 +108,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fa9b3b142ce94a9e7fde57f7031dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FingerIndex: 0
   m_fingerHeight: 0.3
-  tweenType: 38
-  m_PlayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.09792873
-      value: 0.1334757
-      inSlope: -0.0054143104
-      outSlope: -0.0054143104
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.31602854
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20383267
-      value: -0.19938105
-      inSlope: 0.014707154
-      outSlope: 0.014707154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1345278
-      outWeight: 0.15826866
-    - serializedVersion: 3
-      time: 0.25375763
-      value: -0.074218236
-      inSlope: -0.026760878
-      outSlope: -0.026760878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3729344
-      outWeight: 0.9343645
-    - serializedVersion: 3
-      time: 0.4009798
-      value: -0.0040797293
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &332043424
 GameObject:
   m_ObjectHideFlags: 0
@@ -269,59 +218,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fa9b3b142ce94a9e7fde57f7031dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FingerIndex: 0
   m_fingerHeight: 0.3
-  tweenType: 38
-  m_PlayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.09792873
-      value: 0.1334757
-      inSlope: -0.0054143104
-      outSlope: -0.0054143104
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.31602854
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20383267
-      value: -0.19938105
-      inSlope: 0.014707154
-      outSlope: 0.014707154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1345278
-      outWeight: 0.15826866
-    - serializedVersion: 3
-      time: 0.25375763
-      value: -0.074218236
-      inSlope: -0.026760878
-      outSlope: -0.026760878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3729344
-      outWeight: 0.9343645
-    - serializedVersion: 3
-      time: 0.4009798
-      value: -0.0040797293
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &607633410
 GameObject:
   m_ObjectHideFlags: 0
@@ -430,59 +328,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fa9b3b142ce94a9e7fde57f7031dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FingerIndex: 0
   m_fingerHeight: 0.3
-  tweenType: 38
-  m_PlayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.09792873
-      value: 0.1334757
-      inSlope: -0.0054143104
-      outSlope: -0.0054143104
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.31602854
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20383267
-      value: -0.19938105
-      inSlope: 0.014707154
-      outSlope: 0.014707154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1345278
-      outWeight: 0.15826866
-    - serializedVersion: 3
-      time: 0.25375763
-      value: -0.074218236
-      inSlope: -0.026760878
-      outSlope: -0.026760878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3729344
-      outWeight: 0.9343645
-    - serializedVersion: 3
-      time: 0.4009798
-      value: -0.0040797293
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1548305466
 GameObject:
   m_ObjectHideFlags: 0
@@ -591,59 +438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fa9b3b142ce94a9e7fde57f7031dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FingerIndex: 0
   m_fingerHeight: 0.3
-  tweenType: 38
-  m_PlayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.09792873
-      value: 0.1334757
-      inSlope: -0.0054143104
-      outSlope: -0.0054143104
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.31602854
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20383267
-      value: -0.19938105
-      inSlope: 0.014707154
-      outSlope: 0.014707154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1345278
-      outWeight: 0.15826866
-    - serializedVersion: 3
-      time: 0.25375763
-      value: -0.074218236
-      inSlope: -0.026760878
-      outSlope: -0.026760878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3729344
-      outWeight: 0.9343645
-    - serializedVersion: 3
-      time: 0.4009798
-      value: -0.0040797293
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1748366242
 GameObject:
   m_ObjectHideFlags: 0
@@ -752,59 +548,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb6fa9b3b142ce94a9e7fde57f7031dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FingerIndex: 0
   m_fingerHeight: 0.3
-  tweenType: 38
-  m_PlayCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.09792873
-      value: 0.1334757
-      inSlope: -0.0054143104
-      outSlope: -0.0054143104
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.31602854
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 0.20383267
-      value: -0.19938105
-      inSlope: 0.014707154
-      outSlope: 0.014707154
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.1345278
-      outWeight: 0.15826866
-    - serializedVersion: 3
-      time: 0.25375763
-      value: -0.074218236
-      inSlope: -0.026760878
-      outSlope: -0.026760878
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.3729344
-      outWeight: 0.9343645
-    - serializedVersion: 3
-      time: 0.4009798
-      value: -0.0040797293
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
 --- !u!1 &1837069276
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,6 +585,25 @@ Transform:
   m_Father: {fileID: 513011735914240830}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1698307593541106572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 600733063447663401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 144a3690d7053214c9a577d56736e800, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IKSolver:
+  - {fileID: 1550945376}
+  - {fileID: 2110743211}
+  - {fileID: 1950204757}
+  - {fileID: 363089983}
+  - {fileID: 135901445}
+  m_ActiveFromStart: 1
 --- !u!114 &1550945376
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -858,6 +622,11 @@ MonoBehaviour:
   m_threshold: 0.001
   m_projectionNormal: {x: 0, y: 1, z: -1}
   m_rotationAxis: {x: 0, y: 1, z: 1}
+  m_bounds:
+  - x: -160
+    y: 160
+  - x: -160
+    y: 160
   m_upperBoundAngle1: 150
   m_lowerBoundAngle1: -170
   m_upperBoundAngle2: 108
@@ -880,6 +649,11 @@ MonoBehaviour:
   m_threshold: 0.001
   m_projectionNormal: {x: 0, y: 1, z: -1}
   m_rotationAxis: {x: 0, y: 1, z: 1}
+  m_bounds:
+  - x: -160
+    y: 160
+  - x: -160
+    y: 160
   m_upperBoundAngle1: 150
   m_lowerBoundAngle1: -170
   m_upperBoundAngle2: 108
@@ -902,6 +676,11 @@ MonoBehaviour:
   m_threshold: 0.001
   m_projectionNormal: {x: 0, y: 1, z: -1}
   m_rotationAxis: {x: 0, y: 1, z: 1}
+  m_bounds:
+  - x: -160
+    y: 160
+  - x: -160
+    y: 160
   m_upperBoundAngle1: 150
   m_lowerBoundAngle1: -170
   m_upperBoundAngle2: 108
@@ -924,6 +703,11 @@ MonoBehaviour:
   m_threshold: 0.001
   m_projectionNormal: {x: 0, y: 1, z: -1}
   m_rotationAxis: {x: 0, y: 1, z: 1}
+  m_bounds:
+  - x: -160
+    y: 160
+  - x: -160
+    y: 160
   m_upperBoundAngle1: 150
   m_lowerBoundAngle1: -170
   m_upperBoundAngle2: 108
@@ -946,6 +730,11 @@ MonoBehaviour:
   m_threshold: 0.001
   m_projectionNormal: {x: 0, y: 1, z: -1}
   m_rotationAxis: {x: 0, y: 1, z: 1}
+  m_bounds:
+  - x: -160
+    y: 160
+  - x: -160
+    y: 160
   m_upperBoundAngle1: 150
   m_lowerBoundAngle1: -170
   m_upperBoundAngle2: 108
@@ -1099,7 +888,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
       propertyPath: m_Name
-      value: Hand_proto
+      value: Hand_proto Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1419895864150021728, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
       propertyPath: m_TagString
@@ -1151,14 +940,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
+--- !u!4 &513011735914240830 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 254953848323061062, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
+  m_PrefabInstance: {fileID: 330823636479667832}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1009753776509792019 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8461120287179161237, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
-  m_PrefabInstance: {fileID: 330823636479667832}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &3950801129225867180 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3621812097758011860, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
   m_PrefabInstance: {fileID: 330823636479667832}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &8627521847051632766 stripped
@@ -1166,18 +955,23 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: -924276751666565626, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
   m_PrefabInstance: {fileID: 330823636479667832}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &6650473424287200586 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6403107187295263538, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
-  m_PrefabInstance: {fileID: 330823636479667832}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &6798054444620948991 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6539464324594387847, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
   m_PrefabInstance: {fileID: 330823636479667832}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &513011735914240830 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 254953848323061062, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
+--- !u!1 &6650473424287200586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6403107187295263538, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
+  m_PrefabInstance: {fileID: 330823636479667832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3950801129225867180 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3621812097758011860, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
+  m_PrefabInstance: {fileID: 330823636479667832}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &600733063447663401 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 5c1e543470d61cf4ab3e73e795436dd8, type: 3}
   m_PrefabInstance: {fileID: 330823636479667832}
   m_PrefabAsset: {fileID: 0}
