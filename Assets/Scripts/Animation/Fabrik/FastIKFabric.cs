@@ -177,7 +177,7 @@ public class FastIKFabric : MonoBehaviour
         //pre calculate the rotation axis and the world normal which are used in each iteration
         //get direction to the target, ignore change in height
         var directionToTarget = GetDirectionToTarget(targetPosition);
-        directionToTarget.y = 0;
+        //     directionToTarget.y = 0;
         directionToTarget.Normalize();
         Vector3 planeNormal = math.normalize(math.cross(directionToTarget, m_projectionNormal));
 
@@ -307,7 +307,12 @@ public class FastIKFabric : MonoBehaviour
 
     private Vector3 GetDirectionToTarget(Vector3 targetPosition)
     {
+        //   Vector3 tempPosition = GetPositionRootSpace(targetPosition);
+
+        //  return  GetPositionWolrdSpace(m_data[m_data.Length - 1].Position) m_target.position
+        //return (m_target.position - GetPositionWolrdSpace(m_data[0].Position).normalized);
         return (targetPosition - m_data[0].Position).normalized;
+
     }
 
     private void SetNewPositions(Quaternion targetRotation)
@@ -331,6 +336,10 @@ public class FastIKFabric : MonoBehaviour
     /// <summary>
     /// root space functions
     /// </summary>
+    private Vector3 SetPositionRootSpace(Vector3 position)
+    {
+        return m_rootTransform.rotation * position + m_rootTransform.position;
+    }
     private Vector3 GetPositionRootSpace(Transform current)
     {
         if (m_rootTransform == null)
@@ -390,5 +399,8 @@ public class FastIKFabric : MonoBehaviour
 
         //no rotation was needed
         return math.normalize(inputVec);
+    }
+    private void OnDrawGizmos()
+    {
     }
 }
