@@ -11,6 +11,8 @@ namespace NoteSystem
         //events for triggering for example piano sounds or vfx
         public UnityEvent<NoteData> NotePlayedDetailed;
         public UnityEvent<NoteData> NoteReleasedEventDetailed;
+        public UnityEvent SongFinished;
+        public UnityEvent SongStarted;
 
         [SerializeField] private bool m_triggerReleasedEvent = true;
         [SerializeField] private MovementManager m_movementManager;
@@ -79,6 +81,7 @@ namespace NoteSystem
 
         public void Stop()
         {
+            SongFinished.Invoke();
             m_playing = false;
             //return if no song was initialized yet
             if (m_songData == null) return;
@@ -91,6 +94,7 @@ namespace NoteSystem
         }
         public void Play()
         {
+            SongStarted.Invoke();
             m_playing = true;
             m_songData = NoteDataStore.Data;
             m_Time = 0;

@@ -9,6 +9,7 @@ TagManager:
   - Black
   - Octave
   - Reactive
+  - IK
   layers:
   - Default
   - TransparentFX

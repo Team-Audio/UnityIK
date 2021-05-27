@@ -516,7 +516,7 @@ GameObject:
   - component: {fileID: 236974742}
   m_Layer: 0
   m_Name: End Effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -787,6 +787,49 @@ Material:
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
+--- !u!1 &314069783
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 314069785}
+  - component: {fileID: 314069784}
+  m_Layer: 0
+  m_Name: IK Activator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &314069784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314069783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e9f8de0a9b69f9459a1420fb45ca471, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &314069785
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 314069783}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &345160164
 Material:
   serializedVersion: 6
@@ -1407,7 +1450,7 @@ GameObject:
   - component: {fileID: 585386851}
   m_Layer: 0
   m_Name: End effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1836,7 +1879,7 @@ GameObject:
   - component: {fileID: 719126059}
   m_Layer: 0
   m_Name: End effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2140,7 +2183,7 @@ GameObject:
   - component: {fileID: 800967449}
   m_Layer: 0
   m_Name: End Effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2524,7 +2567,7 @@ GameObject:
   - component: {fileID: 833340712}
   m_Layer: 0
   m_Name: End Effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2821,7 +2864,7 @@ GameObject:
   - component: {fileID: 926326462}
   m_Layer: 0
   m_Name: End Effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4323,6 +4366,36 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  SongFinished:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 314069784}
+        m_TargetAssemblyTypeName: IKActivator, Assembly-CSharp
+        m_MethodName: DeactivateAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  SongStarted:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 314069784}
+        m_TargetAssemblyTypeName: IKActivator, Assembly-CSharp
+        m_MethodName: ActivateAll
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   m_triggerReleasedEvent: 1
   m_movementManager: {fileID: 1685289078}
 --- !u!114 &1299520724
@@ -4473,7 +4546,7 @@ GameObject:
   - component: {fileID: 1357639370}
   m_Layer: 0
   m_Name: End Effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5603,7 +5676,7 @@ GameObject:
   - component: {fileID: 1694638577}
   m_Layer: 0
   m_Name: End effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6073,7 +6146,7 @@ GameObject:
   - component: {fileID: 1807310546}
   m_Layer: 0
   m_Name: End effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6493,7 +6566,7 @@ GameObject:
   - component: {fileID: 1981654285}
   m_Layer: 0
   m_Name: End effector
-  m_TagString: Untagged
+  m_TagString: IK
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
