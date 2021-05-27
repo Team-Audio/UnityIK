@@ -4,20 +4,29 @@ using UnityEngine;
 using LeanTween;
 public class PianoKeyManager : MonoBehaviour
 {
-    public Transform RootTransform;
-    public List<Transform> m_keysList = new List<Transform>(13);
+    [SerializeField] private Transform m_pianoTransform;
+    [SerializeField] private Transform m_rootTransform;
+    [SerializeField] private List<Transform> m_keysList = new List<Transform>(13);
+    private void Update()
+    {
+        Debug.DrawRay(m_pianoTransform.position, m_pianoTransform.forward);
+    }
     public void Awake()
     {
         FindKeys();
+    }
+    public Vector3 GetPianoForward()
+    {
+        return m_pianoTransform.forward;
     }
     private void FindKeys()
     {
         Debug.Log("finding keys");
         m_keysList = new List<Transform>(88);
         for (int i = 0; i < 88; i++) m_keysList.Add(null);
-        
 
-        foreach (Transform currentTransform in RootTransform)
+
+        foreach (Transform currentTransform in m_rootTransform)
         {
             //handle octaves
             if (currentTransform.CompareTag("Octave"))
@@ -121,7 +130,7 @@ public static class KeyAnimator
         {
             anim.SetFloat("Blend", value);
         });
-        if(key.CompareTag("White")) key.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.white);
+        if (key.CompareTag("White")) key.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.white);
         else key.GetComponent<Renderer>().material.SetColor("_BaseColor", Color.black);
     }
 }

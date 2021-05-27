@@ -100,7 +100,7 @@ public class MovementManager : MonoBehaviour
         }
         else curve = m_FingerForceCurves[force];
         //actually play the key
-        tC.PlayKey(keyTransform, curve, duration, m_reachBackDuration, isBlack, m_height);
+        tC.PlayKey(keyTransform, curve, m_pianoManager.GetPianoForward(), duration, m_reachBackDuration, isBlack, m_height);
         m_history.Add(new PianoHistory() { keyIndex = keyIndex, FingerIndex = tC.FingerIndex });
     }
 
