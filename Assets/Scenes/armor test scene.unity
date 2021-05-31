@@ -128,6 +128,36 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7556697308154583786, guid: f241dd1dc807f4e4b9d4d429e6522412, type: 3}
   m_PrefabInstance: {fileID: 6979849873486627785}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &79684295
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 79684296}
+  m_Layer: 0
+  m_Name: pianoStart
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &79684296
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 79684295}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.0475, y: 0, z: 0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 327823920}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &90907265 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8139179890731165926, guid: f241dd1dc807f4e4b9d4d429e6522412, type: 3}
@@ -835,6 +865,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &327823920 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7547500063357656398, guid: f241dd1dc807f4e4b9d4d429e6522412, type: 3}
+  m_PrefabInstance: {fileID: 6979849873486627785}
+  m_PrefabAsset: {fileID: 0}
 --- !u!21 &345160164
 Material:
   serializedVersion: 6
@@ -1183,6 +1218,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!1 &385983657
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 385983658}
+  m_Layer: 0
+  m_Name: Piano End
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &385983658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 385983657}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.18, y: 0, z: 0.15}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 327823920}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &421000887
 GameObject:
   m_ObjectHideFlags: 0
@@ -2044,7 +2109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733632822}
   m_LocalRotation: {x: 0.21668793, y: -0.6730872, z: 0.21668793, w: 0.6730872}
-  m_LocalPosition: {x: 0.36, y: 0.29, z: -0.569}
+  m_LocalPosition: {x: 0.777, y: 0.774, z: -0.569}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -5655,6 +5720,7 @@ MonoBehaviour:
   - {fileID: 3962585060803984606}
   m_leftHand: {fileID: 1902937883}
   m_rightHand: {fileID: 1846727597}
+  m_thresholdTime: 0.75
 --- !u!4 &1685289079
 Transform:
   m_ObjectHideFlags: 0
@@ -6123,6 +6189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00073969f98acaf4aaa1919d32998aba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_pianoBeginning: {fileID: 79684296}
+  m_pianoEnd: {fileID: 385983658}
   m_pianoTransform: {fileID: 1766808180}
   m_rootTransform: {fileID: 1766808180}
   m_keysList: []
@@ -6474,7 +6542,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1946289735}
-  m_LocalRotation: {x: 0, y: 0.16960755, z: 0, w: 0.9855117}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6482,7 +6550,7 @@ Transform:
   - {fileID: 41489983}
   m_Father: {fileID: 0}
   m_RootOrder: 7
-  m_LocalEulerAnglesHint: {x: 0, y: 19.53, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!21 &1955959268
 Material:
   serializedVersion: 6
@@ -7155,7 +7223,7 @@ PrefabInstance:
       objectReference: {fileID: 941547440}
     - target: {fileID: 8692536023296014255, guid: f241dd1dc807f4e4b9d4d429e6522412, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8763139884201472747, guid: f241dd1dc807f4e4b9d4d429e6522412, type: 3}
       propertyPath: m_Materials.Array.data[0]

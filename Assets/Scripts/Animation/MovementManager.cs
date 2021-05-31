@@ -28,16 +28,25 @@ public class MovementManager : MonoBehaviour
     [SerializeField] private Transform m_leftHand;
     [SerializeField] private Transform m_rightHand;
     private float m_forceThreshold = 0.33f;
-
-
+    private List<float> m_lefthandTimeLastPlayed;
+    private List<float> m_righthandTimeLastPlayed;
     private List<PianoHistory> m_history = new List<PianoHistory>();
-
+    [SerializeField] private float m_thresholdTime = 0.1f;
     private void Start()
     {
         if (m_leftHandTargets.Count <= 0) return;
-        Transform t = m_leftHandTargets[2];
+        Transform trans = m_leftHandTargets[2];
         m_forceThreshold = 1.0f / (float)m_FingerForceCurves.Count;
         m_history = new List<PianoHistory>();
+        m_lefthandTimeLastPlayed = new List<float>();
+        m_righthandTimeLastPlayed = new List<float>();
+        float t = Time.realtimeSinceStartup;
+        for (int i = 0; i < 5; i++)
+        {
+            m_lefthandTimeLastPlayed.Add(t);
+            m_righthandTimeLastPlayed.Add(t);
+        }
+
     }
     public void UpdateHandPosition(List<NoteData> pianoKeys, float t)
     {
@@ -59,7 +68,7 @@ public class MovementManager : MonoBehaviour
     //should be called in an update loop that gets the key pressed data from the ML algorithm
     public void PlayKey(int keyIndex, float duration = 1.0f, float velocity = 0.001f, int fingerIndex = -1)
     {
-        Debug.Log(keyIndex);
+        // Debug.Log(keyIndex);
         //get the the transform of the piano key to animate
         Transform keyTransform = m_pianoManager.GetKey(keyIndex);
 
@@ -115,22 +124,38 @@ public class MovementManager : MonoBehaviour
         //pick the targets based on the distance to the hand
         List<Transform> targetList;
         //chose left or right hand
+        bool left;
         if (distR > distL)
         {
             targetList = m_leftHandTargets;
+            left = true;
         }
         else
         {
             targetList = m_rightHandTargets;
+            left = false;
         }
 
         //find the target closest to the key
         float dist = float.MaxValue;
         int currentIndex = -1;
+        Debug.Log("-----------------");
         for (int i = 0; i < targetList.Count; i++)
         {
+
+            //skip fingers that played a key very shortly ago
+            float t;
+            if (left) t = m_lefthandTimeLastPlayed[i];
+            else t = m_righthandTimeLastPlayed[i];
+            float delta = Time.realtimeSinceStartup - t;
+            //if (delta < m_thresholdTime) continue;
+            Debug.Log(Time.realtimeSinceStartup.ToString() + " - " + t.ToString() + " = " + delta.ToString());
+
             //get the distance and check if it is smaller than the so far smallest distance
-            float currentDist = math.abs(key.transform.position.z - targetList[i].transform.position.z);
+            Vector3 p = m_pianoManager.ProjectPointAlongPiano(targetList[i].transform.position);
+            Debug.DrawLine(p, targetList[i].transform.position, Color.red, 30);
+            Debug.DrawLine(p, key.transform.position, Color.green, 30);
+            float currentDist = math.length(key.transform.position - m_pianoManager.ProjectPointAlongPiano(targetList[i].transform.position));
             if (currentDist < dist)
             {
                 //set index as the current index and store the new smallest distance
@@ -139,6 +164,13 @@ public class MovementManager : MonoBehaviour
             }
         }
         if (currentIndex < 0 || currentIndex > targetList.Count) return null;
+
+        // Debug.DrawLine(targetList[currentIndex].position , key.transform.position, Color.white, 30);
+        Debug.Log(currentIndex);
+
+        //store the time the key was played at
+        if (left) m_lefthandTimeLastPlayed[currentIndex] = Time.realtimeSinceStartup;
+        else m_righthandTimeLastPlayed[currentIndex] = Time.realtimeSinceStartup;
         //return the closest transform found
         return targetList[currentIndex];
     }

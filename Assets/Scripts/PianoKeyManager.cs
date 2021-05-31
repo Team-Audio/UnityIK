@@ -2,8 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using LeanTween;
+using Unity.Mathematics;
 public class PianoKeyManager : MonoBehaviour
 {
+    [Header("--Transforms to determine finger position along the piano--")]
+    [SerializeField] private Transform m_pianoBeginning;
+    [SerializeField] private Transform m_pianoEnd;
+
+
+    [Header("--Transforms to acces the piano and its keys--")]
     [SerializeField] private Transform m_pianoTransform;
     [SerializeField] private Transform m_rootTransform;
     [SerializeField] private List<Transform> m_keysList = new List<Transform>(13);
@@ -19,9 +26,34 @@ public class PianoKeyManager : MonoBehaviour
     {
         return m_pianoTransform.forward;
     }
+    public Vector3 GetPianoRight()
+    {
+        //Check if transforms are setup
+        if (!m_pianoEnd || !m_pianoBeginning) return Vector3.zero;
+        //return normalized direction vector from beginning to end of the piano
+        return (m_pianoEnd.position - m_pianoBeginning.position);
+    }
+    public Vector3 GetPianoBeginningPos() => m_pianoBeginning.position;
+    public Vector3 ProjectPointAlongPiano(Vector3 A)
+    {
+        Vector3 B = m_pianoBeginning.position;
+        //translate input point onto same height as the piano keys
+        A.y = B.y;
+        //get direction vectors
+        Vector3 dirAB = (A - B);
+        Vector3 lineDir = GetPianoRight();
+        //Calculate the dot product, between the direction vector and the vector of the line to project onto
+        float dotProduct = math.dot(dirAB, lineDir);
+        //get the squared length of the line
+        float len2 = math.lengthsq(lineDir);
+        //scale the line dir based on the calculated dot product
+        Vector3 p = B + lineDir * dotProduct / len2;
+        return p;
+      
+    }
     private void FindKeys()
     {
-        Debug.Log("finding keys");
+        //Debug.Log("finding keys");
         m_keysList = new List<Transform>(88);
         for (int i = 0; i < 88; i++) m_keysList.Add(null);
 
@@ -84,7 +116,7 @@ public class PianoKeyManager : MonoBehaviour
     }
     public Transform GetKey(int i)
     {
-        Debug.Log("getting key: " + i);
+        // Debug.Log("getting key: " + i);
         if (i < 0 || i > m_keysList.Count)
         {
             return null;
