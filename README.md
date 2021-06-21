@@ -7,14 +7,3 @@ My implementation is based on the FABRIK algorithm explained in [this paper](htt
 I added the in the paper suggested hinge joint to simulate finger movement.
 
 
-## TO DO:
-
-- [x] Basic hand movement.
-
-- [ ] Tweak parameters for more realistic hand movements.
-
-- [ ] More sophisticated test environment / Piano playing test environment.
-
-
-
-
